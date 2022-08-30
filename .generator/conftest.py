@@ -440,10 +440,10 @@ def execute_request(context, api_version):
     """Execute the prepared request."""
 
 
-@when("the request with pagination is sent")
-def execute_request_with_pagination(context):
-    """Execute the prepared request paginated."""
-    context["pagination"] = True
+# @when("the request with pagination is sent")
+# def execute_request_with_pagination(context):
+#     """Execute the prepared request paginated."""
+#     context["pagination"] = True
 
 
 @then(parsers.parse("the response status is {status:d} {description}"))
