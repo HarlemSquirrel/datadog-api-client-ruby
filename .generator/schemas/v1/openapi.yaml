@@ -3627,6 +3627,7 @@ components:
       description: Supported products for hourly usage attribution requests.
       enum:
       - api_usage
+      - apm_fargate_usage
       - apm_host_usage
       - appsec_usage
       - browser_usage
@@ -3654,6 +3655,7 @@ components:
       type: string
       x-enum-varnames:
       - API_USAGE
+      - APM_FARGATE_USAGE
       - APM_HOST_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
@@ -6872,6 +6874,8 @@ components:
       enum:
       - api_usage
       - api_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -6925,6 +6929,8 @@ components:
       x-enum-varnames:
       - API_USAGE
       - API_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -6983,6 +6989,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -13640,6 +13654,8 @@ components:
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -13672,6 +13688,8 @@ components:
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -13716,6 +13734,8 @@ components:
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -13759,6 +13779,8 @@ components:
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -13797,6 +13819,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -14483,6 +14513,11 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        apm_fargate_count:
+          description: The high water mark of APM ECS Fargate tasks during the given
+            hour.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -15285,6 +15320,16 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_hwm:
+          description: Shows the high-water mark of all APM ECS Fargate tasks over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -15613,6 +15658,16 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for the given org.
+          format: int64
+          type: integer
+        apm_fargate_count_hwm:
+          description: Shows the high-water marks of all APM ECS Fargate tasks over
+            all hours in the current months for the given org.
           format: int64
           type: integer
         apm_host_top99p:
@@ -15946,6 +16001,16 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_avg_sum:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_hwm_sum:
+          description: Shows the sum of the high-water marks of all APM ECS Fargate
+            tasks over all hours in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
